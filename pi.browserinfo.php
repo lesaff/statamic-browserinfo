@@ -9,6 +9,7 @@
  * @license    http://opensource.org/licenses/MIT
  *
  * Versions
+ * 1.0.1       Added slugify option, returns slugified output as default
  * 1.0.0       Initial release
  */
 
@@ -45,23 +46,35 @@ class Plugin_browserinfo extends Plugin
     public function language()
     {
         $language = new Language;
-        $data = $language->getLanguage();
+        $data     = $language->getLanguage();
         return $data;
     }
 
     // Get browser info from visiting browser
     public function browser()
     {
-        $browser_name = $this->getBrowserInfo()['browser_name'];
+        $slugify               = $this->fetchParam("slugify", TRUE, NULL, FALSE, TRUE);
+        $browser_name          = $this->getBrowserInfo()['browser_name'];
         $browser_version_major = $this->getBrowserInfo()['browser_version_major'];
-        return $browser_name . ' ' . $browser_version_major;
+        if ($slugify)
+        {
+            return Slug::make($browser_name . ' ' . $browser_version_major);
+        } else {
+            return $browser_name . ' ' . $browser_version_major;
+        }
     }
 
     // Get browser name from visiting browser
     public function browser_name()
     {
+        $slugify      = $this->fetchParam("slugify", TRUE, NULL, FALSE, TRUE);
         $browser_name = $this->getBrowserInfo()['browser_name'];
-        return $browser_name;
+        if ($slugify)
+        {
+            return Slug::make($browser_name);
+        } else {
+            return $browser_name;
+        }
     }
 
     // Get browser version from visiting browser
@@ -93,16 +106,28 @@ class Plugin_browserinfo extends Plugin
     // Get OS info from visiting browser
     public function os()
     {
-        $os_name = $this->getBrowserInfo()['os_name'];
+        $slugify          = $this->fetchParam("slugify", TRUE, NULL, FALSE, TRUE);
+        $os_name          = $this->getBrowserInfo()['os_name'];
         $os_version_major = $this->getBrowserInfo()['os_version_major'];
-        return $os_name . ' ' . $os_version_major;
+        if ($slugify)
+        {
+            return Slug::make($os_name . ' ' . $os_version_major);
+        } else {
+            return $os_name . ' ' . $os_version_major;
+        }
     }
 
     // Get OS name from visiting browser
     public function os_name()
     {
+        $slugify          = $this->fetchParam("slugify", TRUE, NULL, FALSE, TRUE);
         $os_name = $this->getBrowserInfo()['os_name'];
-        return $os_name;
+        if ($slugify)
+        {
+            return Slug::make($os_name);
+        } else {
+            return $os_name;
+        }
     }
 
     // Get OS version from visiting browser
@@ -134,21 +159,39 @@ class Plugin_browserinfo extends Plugin
     // Get device type from visiting browser
     public function device_type()
     {
+        $slugify     = $this->fetchParam("slugify", TRUE, NULL, FALSE, TRUE);
         $device_type = $this->getBrowserInfo()['family'];
-        return $device_type;
+        if ($slugify)
+        {
+            return Slug::make($device_type);
+        } else {
+            return $device_type;
+        }
     }
 
     // Get device brand from visiting browser
     public function device_brand()
     {
+        $slugify     = $this->fetchParam("slugify", TRUE, NULL, FALSE, TRUE);
         $device_brand = $this->getBrowserInfo()['brand'];
-        return $device_brand;
+        if ($slugify)
+        {
+            return Slug::make($device_brand);
+        } else {
+            return $device_brand;
+        }
     }
 
     // Get device model from visiting browser
     public function device_model()
     {
+        $slugify     = $this->fetchParam("slugify", TRUE, NULL, FALSE, TRUE);
         $device_model = $this->getBrowserInfo()['model'];
-        return $device_model;
+        if ($slugify)
+        {
+            return Slug::make($device_model);
+        } else {
+            return $device_model;
+        }
     }
 }
