@@ -9,6 +9,7 @@
  * @license    http://opensource.org/licenses/MIT
  *
  * Versions
+ * 1.0.2       Added browser ua
  * 1.0.1       Added slugify option, returns slugified output as default
  * 1.0.0       Initial release
  */
@@ -18,7 +19,7 @@ require __DIR__ . '/vendor/autoload.php';
 use Browser\Language;
 use UAParser\Parser;
 
-class Plugin_browserinfo extends Plugin 
+class Plugin_browserinfo extends Plugin
 {
     private function getBrowserInfo() {
         $ua = $_SERVER['HTTP_USER_AGENT'];
@@ -192,6 +193,19 @@ class Plugin_browserinfo extends Plugin
             return Slug::make($device_model);
         } else {
             return $device_model;
+        }
+    }
+
+    // Get user agent from visiting browser
+    public function user_agent()
+    {
+        $slugify     = $this->fetchParam("slugify", TRUE, NULL, FALSE, TRUE);
+        $user_agent  = $this->getBrowserInfo()['browser_ua'];
+        if ($slugify)
+        {
+            return Slug::make($user_agent);
+        } else {
+            return $user_agent;
         }
     }
 }
