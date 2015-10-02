@@ -2,12 +2,13 @@
 # Browser Detection Add-on for Statamic
 By Rudy Affandi (2015)
 
-Version 1.0.1
+Version 1.0.2
 
 ## What is this?
 `browserinfo` returns detailed information about the visiting browser.
 
 ## Changelog
+- 1.0.2: Added user agent
 - 1.0.1: Added slugify option, returns slugified output as default
 - 1.0.0: Initial release
 
@@ -26,6 +27,7 @@ Copy the 'browserinfo' folder to the '_add-ons' folder in your Statamic website.
     {{ browserinfo:device_type slugify="true|false" }} returns browser device type
     {{ browserinfo:device_brand slugify="true|false" }} returns browser device brand
     {{ browserinfo:device_model slugify="true|false" }} returns browser device model
+    {{ browserinfo:user_agent slugify="true|false" }} returns browser user agent
 ```
 
 ### Available parameters
