@@ -1,0 +1,6 @@
+[submodule "vendor/ua-parser/uap-php"]
+	path = vendor/ua-parser/uap-php
+        url = https://github.com/ua-parser/uap-php
+[submodule "vendor/sinergi/browser-detector"]
+	path = vendor/sinergi/browser-detector
+        url = https://github.com/sinergi/php-browser-detector
